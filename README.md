@@ -13,6 +13,12 @@ A DeFi app that helps you consolidating your multichain balances per token and h
 5. We consolidate the multichain balances approving/transfering the tokens to the chain with a protocol offering the highest yield...
 6. Enjoy the highest yield in town!!!!
 
+### RoadMap
+
+1. **Phase 1 (Completed)**: SignIn to app. Initializing Nexus SDK. Consolidating multichain balances per token. Checking balances realtime.
+2. **Phase 2 (Pending)**: Aggregating DeFi lending protocols yield opportunities multichain. Approving/transfering tokens between chains to cosolidated balances in one chain/DeFi lending protocol. Withdrawing the best yield in town.
+3. **Phase 3 (Future)**: AI agent to check for best multicheck yield opportunities. Automatically rebalancing the portfolios based on best opportunities found.
+
 ### Getting Started
 
 First, install the packages:
