@@ -1,34 +1,36 @@
-"use client";
-
-import ConnectWallet from "@/components/blocks/connect-wallet";
-import Nexus from "@/components/nexus";
-import NexusInitButton from "@/components/nexus-init";
-import { useNexus } from "@/providers/NexusProvider";
-
-export default function Home() {
-  const { nexusSDK } = useNexus();
+'use client';
+ 
+import { useState } from 'react';
+import ConnectButton from '@/components/connect-button';
+import InitButton from '@/components/init-button';
+import FetchUnifiedBalanceButton from '@/components/fetch-unified-balance-button';
+import DeinitButton from '@/components/de-init-button';
+import { isInitialized } from '@/lib/nexus';
+ 
+export default function Page() {
+  const [initialized, setInitialized] = useState(isInitialized());
+  const [balances, setBalances] = useState<any>(null);
+ 
+  const btn =
+    'px-4 py-2 rounded-md bg-blue-600 text-white hover:bg-blue-700 ' +
+    'disabled:opacity-50 disabled:cursor-not-allowed';
+ 
   return (
-    <div className="font-sans flex flex-col items-center justify-items-center min-h-screen p-8 pb-20 gap-y-6 sm:p-20">
-      <h1 className="text-3xl font-semibold z-10">
-        Avail Nexus Next.js template
-      </h1>
-      <h2 className="text-lg font-semibold z-10">
-        Do you first transaction in seconds
-      </h2>
-      <div className="flex gap-x-4 items-center justify-center z-10">
-        <ConnectWallet />
-        <NexusInitButton />
+    <main className="min-h-screen flex items-center justify-center">
+      <div className="flex flex-col items-center gap-4">
+        <ConnectButton className={btn} />
+        <InitButton className={btn} onReady={() => setInitialized(true)} />
+        <FetchUnifiedBalanceButton className={btn} onResult={(r) => setBalances(r)} />
+        <DeinitButton className={btn} onDone={() => { setInitialized(false); setBalances(null); }} />
+ 
+        <div className="mt-2">
+          <b>Nexus SDK Initialization Status:</b> {initialized ? 'Initialized' : 'Not initialized'}
+        </div>
+ 
+        {balances && (
+          <pre className="whitespace-pre-wrap">{JSON.stringify(balances, null, 2)}</pre>
+        )}
       </div>
-      {nexusSDK?.isInitialized() && <Nexus />}
-      <div
-        className="fixed inset-0 z-0"
-        style={{
-          backgroundImage: `
-            radial-gradient(125% 125% at 50% 10%, #ffffff 40%, #14b8a6 100%)
-          `,
-          backgroundSize: "100% 100%",
-        }}
-      />
-    </div>
+    </main>
   );
 }
