@@ -2,6 +2,8 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
+Check docs [here](https://docs.availproject.org/nexus/nexus-examples/nexus-initialization-basic)
+
 First, run the development server:
 
 ```bash
